@@ -7,7 +7,7 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing
 month_list = {'January':'01', 'February':'02', 'March':'03', 'April':'04', 'May':'05', 'June':'06', 'July':'07',
               'August':'08', 'September':'09','October':'10', 'November':'11', 'December':'12'}
 
-path = 'Stocks/'
+path = '../Stocks/'
 # path = 'C:/Users/Steven/.PyCharm2018.2/config/scratches/stocks/'
 stocks = pd.DataFrame()
 # test.to_csv('test1.csv')
@@ -24,9 +24,9 @@ for file in os.listdir(path):
     # test.to_csv('test2.csv')
 
 stocks = stocks.sort_values(by = ['Symbol', 'date'], ascending=[True, True])
-# test.to_csv('test.csv')
+stocks.to_csv('test.csv')
 
-stocks.index.freq = 'MS'
-train, test = df.iloc[:130, 0], df.iloc[130:, 0]
-model = ExponentialSmoothing(train, seasonal='mul', seasonal_periods=12).fit()
-pred = model.predict(start=test.index[0], end=test.index[-1])
+#stocks.index.freq = 'MS'
+#train, test = df.iloc[:130, 0], df.iloc[130:, 0]
+#model = ExponentialSmoothing(train, seasonal='mul', seasonal_periods=12).fit()
+#pred = model.predict(start=test.index[0], end=test.index[-1])
