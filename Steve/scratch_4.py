@@ -7,7 +7,7 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing
 month_list = {'January':'01', 'February':'02', 'March':'03', 'April':'04', 'May':'05', 'June':'06', 'July':'07',
               'August':'08', 'September':'09','October':'10', 'November':'11', 'December':'12'}
 
-path = '../Stocks/'
+path = '../Stocks/SCAP/'
 # path = 'C:/Users/Steven/.PyCharm2018.2/config/scratches/stocks/'
 stocks = pd.DataFrame()
 # test.to_csv('test1.csv')

@@ -8,11 +8,11 @@ def GroupByCompany(readFile = "",write=False,writeFile=""):
     companyDF = []
     while (i<len(companies)):
         companyDF.append(df[df['Symbol']==companies[i]])
-        #if(write==True and not writeFile == ""):
-            #companyDF[i].to_csv(writeFile+'/'+companies[i]+'.csv')
+        if(write==True and not writeFile == ""):
+            companyDF[i].to_csv(writeFile+'/'+companies[i]+'.csv')
         i = i +1
     return companyDF
     
-print(GroupByCompany(readFile = "test.csv",write = False,writeFile = "../Stocks_By_Company"))
+print(GroupByCompany(readFile="../Stocks_By_Company/SCAP/00ALL_SCAP.csv",write = True,writeFile = "../Stocks_By_Company/SCAP"))
 
 
