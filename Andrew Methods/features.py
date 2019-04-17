@@ -1,5 +1,8 @@
 import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.model_selection import train_test_split 
 pd.options.mode.chained_assignment = None  # default='warn'
 
 def AddFeature():
@@ -26,10 +29,50 @@ def AddFeature():
     print(df.info())
     y = df["Close"]
     X = df[features]
+
+    split = int(len(X)*.8)
+
+    X_train = X[:(split-1)]
+    
+    X_test = X[split:]
+    
+    y_train =y[:(split-1)]
+    y_test = y[split:]
+    
+  
+
+    reg = LinearRegression().fit(X_train, y_train)
+    
+    predictions = reg.predict(X_test)
+    
+    i = 0
+    pctChng = []
+
+    while(i<len(predictions)):
+        num = abs((predictions[i]-y_test.values[i]))
+        num = (num/y_test.values[i])*100
+        pctChng.append(num)
+        i=i+1
+    
+    pctChng = pd.Series(pctChng)
+    print(pctChng.describe())
     
     dt = DecisionTreeRegressor(min_samples_split=40, random_state=99)
-    dt.fit(X, y)
+    dt.fit(X_train, y_train)
+    predictions = dt.predict(X_test)
+    pctChng=[]
+    
+    i=0
+    while(i<len(predictions)):
+        num = abs((predictions[i]-y_test.values[i]))
+        num = (num/y_test.values[i])*100
+        pctChng.append(num)
+        i=i+1
+    
+    pctChng = pd.Series(pctChng)
+    print(pctChng.describe())
     print(dt.feature_importances_)
+    
     
 def GroupByCompany(df):    
     companies = df['Symbol'].values
